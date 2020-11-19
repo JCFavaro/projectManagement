@@ -19,6 +19,14 @@ import ar.edu.ucc.arqSoft.common.model.GenericObject;
 @Table (name = "PROJECT")
 public class Project extends GenericObject{
 	
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "NAME")

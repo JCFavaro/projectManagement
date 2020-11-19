@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,6 +38,18 @@ public class Task extends GenericObject{
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STATE_ID")
 	private State state;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="PROJECT_ID")
+	private Project project;
+	
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	public String getDescription() {
 		return description;

@@ -1,6 +1,10 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
+import java.util.Set;
+
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
+import ar.edu.ucc.arqSoft.taskManagement.model.Project;
+import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 
 public class UserResponseDto implements DtoEntity{
 
@@ -11,6 +15,11 @@ public class UserResponseDto implements DtoEntity{
 	private String dni;
 	
 	private String email;
+	
+	private Set<Project> projects;
+	
+	private Set<Task> tasks;
+
 
 	public String getName() {
 		return name;
@@ -42,6 +51,22 @@ public class UserResponseDto implements DtoEntity{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public Set<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
 	}
 
 }

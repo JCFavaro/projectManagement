@@ -17,7 +17,7 @@ public class TaskService {
 	@Autowired
 	private TaskDao taskDao;
 	
-	public TaskResponseDto getMovieByID(Long id) throws EntityNotFoundException, BadRequestException {
+	public TaskResponseDto getTaskById(Long id) throws EntityNotFoundException, BadRequestException {
 
 		if (id <= 0) {
 			throw new BadRequestException();
@@ -27,10 +27,10 @@ public class TaskService {
 
 		TaskResponseDto dto = new TaskResponseDto();
 
-		//Poner a que proyecto pertenece
 		dto.setDescription(task.getDescription());
-		// Que usuario esta haciendo que tarea
-
+		dto.setProject(task.getProject());
+		dto.setUser(task.getUser());
+		dto.setState(task.getState());
 
 		return dto;
 

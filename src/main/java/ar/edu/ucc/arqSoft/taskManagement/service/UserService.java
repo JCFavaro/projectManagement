@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
+import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
-import ar.edu.ucc.arqSoft.taskManagement.dto.UserRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
@@ -18,22 +18,22 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public UserResponseDto registerMember(UserRequestDto dto) throws BadRequestException {
+	public UserResponseDto getUserById(Long id) throws EntityNotFoundException, BadRequestException {
 
 		User user = new User();
 
 		userDao.insert(user);
 
-		UserResponseDto response = new UserResponseDto();
+		UserResponseDto dto = new UserResponseDto();
 
-		response.setName(user.getName());
-		response.setLastName(user.getLastName());
-		response.setDni(user.getDni());
-		response.setEmail(user.getEmail());
-		//Devolver los proyectos en los que pertence
-		// Y las tareas a las que esta asignado
+		dto.setName(user.getName());
+		dto.setLastName(user.getLastName());
+		dto.setDni(user.getDni());
+		dto.setEmail(user.getEmail());
+		dto.setProjects(user.getProjects());
+		dto.setTasks(user.getTasks());
 		
-		return response;
+		return dto;
 
 	}
 	

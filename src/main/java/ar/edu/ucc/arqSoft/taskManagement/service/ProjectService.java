@@ -13,10 +13,10 @@ import ar.edu.ucc.arqSoft.taskManagement.model.Project;
 @Service
 @Transactional
 public class ProjectService {
-	
+
 	@Autowired
 	private ProjectDao projectDao;
-	
+
 	public ProjectResponseDto getProjectById(Long id) throws EntityNotFoundException, BadRequestException {
 
 		if (id <= 0) {
@@ -29,7 +29,8 @@ public class ProjectService {
 
 		dto.setName(project.getName());
 		dto.setDescription(project.getDescription());
-		
+		dto.setUsers(project.getUsers());
+		dto.setTasks(project.getTasks());
 
 		return dto;
 
