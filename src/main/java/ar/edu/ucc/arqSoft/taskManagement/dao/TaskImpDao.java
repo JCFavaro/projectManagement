@@ -12,7 +12,7 @@ import ar.edu.ucc.arqSoft.common.dao.GenericImpDao;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 
 @Repository
-public class TaskImpDao  extends GenericImpDao<Task, Long> implements TaskDao{
+public class TaskImpDao extends GenericImpDao<Task, Long> implements TaskDao{
 
 	@Override
 	public List<Task> findByName(String name) {

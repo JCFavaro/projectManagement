@@ -18,14 +18,6 @@ import ar.edu.ucc.arqSoft.common.model.GenericObject;
 @Entity
 @Table (name = "PROJECT")
 public class Project extends GenericObject{
-	
-	public Set<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
 
 	@NotNull
 	@Size(min = 1, max = 250)
@@ -37,7 +29,7 @@ public class Project extends GenericObject{
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@OneToMany(targetEntity=Project.class, mappedBy="project", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
 	private Set<Comment> comments;
 	
 	@ManyToMany(targetEntity=Project.class)
@@ -47,7 +39,7 @@ public class Project extends GenericObject{
 	@JoinColumn(name="STATE_ID")
 	private State state;
 
-	@OneToMany(targetEntity=Project.class, mappedBy="project", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
 	private Set<Task> tasks;
 	
 	public String getName() {
@@ -90,4 +82,11 @@ public class Project extends GenericObject{
 		this.state = state;
 	}
 	
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
 }

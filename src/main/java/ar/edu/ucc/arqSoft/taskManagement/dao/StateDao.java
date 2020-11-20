@@ -1,5 +1,8 @@
 package ar.edu.ucc.arqSoft.taskManagement.dao;
 
-public interface StateDao {
+import ar.edu.ucc.arqSoft.common.dao.GenericDao;
+import ar.edu.ucc.arqSoft.taskManagement.model.State;
+
+public interface StateDao extends GenericDao<State, Long>{
 
 }

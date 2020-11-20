@@ -42,7 +42,7 @@ public class User extends GenericObject{
 	private Set<Project> projects;
 	
 	//Un usuario puede tener muchas tareas.
-	@OneToMany(targetEntity=User.class, mappedBy="user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
 	private Set<Task> tasks;
 
 	public String getName() {

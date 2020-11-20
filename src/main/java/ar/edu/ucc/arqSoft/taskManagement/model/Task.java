@@ -24,7 +24,7 @@ public class Task extends GenericObject{
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@OneToMany(targetEntity=Task.class, mappedBy="task", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="task", fetch = FetchType.LAZY)
 	private Set<Comment> comments;
 	
 	//Una tarea puede ser asignada a un solo usuario
