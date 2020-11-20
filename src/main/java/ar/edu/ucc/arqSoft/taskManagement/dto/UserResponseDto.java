@@ -20,7 +20,6 @@ public class UserResponseDto implements DtoEntity{
 	
 	private Set<Task> tasks;
 
-
 	public String getName() {
 		return name;
 	}

@@ -20,10 +20,12 @@ public class UserService {
 	
 	public UserResponseDto getUserById(Long id) throws EntityNotFoundException, BadRequestException {
 
-		User user = new User();
-
-		userDao.insert(user);
-
+		if (id <= 0) {
+			throw new BadRequestException();
+		}
+		
+		User user = userDao.load(id);
+		
 		UserResponseDto dto = new UserResponseDto();
 
 		dto.setName(user.getName());

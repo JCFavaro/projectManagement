@@ -31,6 +31,7 @@ public class ProjectService {
 		dto.setDescription(project.getDescription());
 		dto.setUsers(project.getUsers());
 		dto.setTasks(project.getTasks());
+		dto.setState(project.getState());
 
 		return dto;
 

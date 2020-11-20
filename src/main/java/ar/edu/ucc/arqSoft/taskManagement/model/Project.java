@@ -32,7 +32,7 @@ public class Project extends GenericObject{
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
 	private Set<Comment> comments;
 	
-	@ManyToMany(targetEntity=Project.class)
+	@ManyToMany(mappedBy = "projects")
 	private Set<User> users;
 	
 	@OneToOne(fetch = FetchType.LAZY)

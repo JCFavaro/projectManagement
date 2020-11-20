@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class GenericObject {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

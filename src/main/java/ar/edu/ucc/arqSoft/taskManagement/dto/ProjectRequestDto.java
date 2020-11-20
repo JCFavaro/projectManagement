@@ -3,19 +3,22 @@ package ar.edu.ucc.arqSoft.taskManagement.dto;
 import java.util.Set;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
+import ar.edu.ucc.arqSoft.taskManagement.model.State;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
-public class ProjectRequestDto implements DtoEntity{
+public class ProjectRequestDto implements DtoEntity {
 
-private String name;
-	
+	private String name;
+
 	private String description;
 	
+	private State state;
+
 	private Set<User> users;
 
 	private Set<Task> tasks;
-	
+
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -32,7 +35,6 @@ private String name;
 		this.tasks = tasks;
 	}
 
-	
 	public String getName() {
 		return name;
 	}
@@ -47,5 +49,13 @@ private String name;
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 }
