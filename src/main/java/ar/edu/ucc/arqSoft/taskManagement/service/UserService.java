@@ -16,45 +16,51 @@ import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
 import ar.edu.ucc.arqSoft.common.dto.ModelDtoConverter;
 
-
 @Service
 @Transactional
 public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
-	public UserResponseDto getUserById(Long id) throws EntityNotFoundException, BadRequestException{
+
+	public UserResponseDto getUserById(Long id) throws EntityNotFoundException, BadRequestException {
 		if (id <= 0) {
 			throw new BadRequestException();
 		}
-        User user = userDao.load(id);
+		User user = userDao.load(id);
 
-        UserResponseDto response = (UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto());
-        return response;
-    }
-	
+		UserResponseDto response = (UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto());
+	/*	
+		response.setName(user.getName());
+		response.setLastName(user.getLastName());
+		response.setEmail(user.getEmail());
+		response.setDni(user.getDni());
+		response.setProjects(user.getProjects());
+		response.setTasks(user.getTasks());*/
+		
+		
+		return response;
+	}
+
 	public List<UserResponseDto> getAllUsers() {
-	        List<User> users = userDao.getAll();
+		List<User> users = userDao.getAll();
 
-	        List<UserResponseDto> response = new ArrayList<UserResponseDto>();
+		List<UserResponseDto> response = new ArrayList<UserResponseDto>();
 
-	        for (User user : users) {
-	            response.add((UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto()));
-	        }
+		for (User user : users) {
+			response.add((UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto()));
+		}
 
-	        return response;
-	    }
-	
-	public UserResponseDto registerUser (UserRequestDto dto) {
-		
+		return response;
+	}
+
+	public UserResponseDto registerUser(UserRequestDto dto) {
+
 		User user = new User();
-		
+
 		userDao.insert(user);
-		
 
 		UserResponseDto response = new UserResponseDto();
-		
 
 		response.setName(user.getName());
 		response.setLastName(user.getLastName());
@@ -62,9 +68,8 @@ public class UserService {
 		response.setEmail(user.getEmail());
 		response.setProjects(user.getProjects());
 		response.setTasks(user.getTasks());
-		
+
 		return response;
-		
-		
-	}	
+
+	}
 }

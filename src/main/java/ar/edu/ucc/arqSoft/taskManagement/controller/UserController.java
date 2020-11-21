@@ -18,7 +18,6 @@ import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.service.UserService;
 
-
 @Controller
 @RequestMapping("/user")
 public class UserController {

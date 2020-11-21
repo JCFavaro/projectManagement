@@ -7,6 +7,8 @@ import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
 public class TaskResponseDto implements DtoEntity{
 
+	private String name;
+	
 	private String description;
 	
 	private User user;
@@ -45,6 +47,14 @@ public class TaskResponseDto implements DtoEntity{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

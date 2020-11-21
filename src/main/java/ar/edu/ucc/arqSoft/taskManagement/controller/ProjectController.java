@@ -16,7 +16,6 @@ import ar.edu.ucc.arqSoft.common.dto.GenericExceptionDto;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
-import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.service.ProjectService;
 
 @Controller

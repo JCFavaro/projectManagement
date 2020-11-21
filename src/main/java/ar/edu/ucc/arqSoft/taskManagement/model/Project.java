@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
@@ -30,19 +30,22 @@ public class Project extends GenericObject{
 	@Size(min = 1, max = 250)
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
 
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Comment> comments;
 	
-	@ManyToMany(mappedBy = "projects")
-	private Set<User> users;
+	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Set<User> users; //= new HashSet<>();
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STATE_ID")
+	@JsonIgnore
 	private State state;
-    
+	
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Task> tasks;
 	
 	public String getName() {

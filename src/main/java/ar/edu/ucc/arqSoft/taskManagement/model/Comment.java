@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
@@ -17,16 +19,31 @@ public class Comment extends GenericObject{
 
 	@NotNull
 	@Size(min = 1, max = 250)
+	@Column(name = "TITLE")
+	private String title;
+	
+	@NotNull
+	@Size(min = 1, max = 250)
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="TASK_ID")
+	@JsonIgnore
 	private Task task;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="PROJECT_ID")
+	@JsonIgnore
 	private Project project;
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getDescription() {
 		return description;

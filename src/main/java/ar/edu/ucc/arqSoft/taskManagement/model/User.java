@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.JoinColumn;
 
@@ -45,17 +45,18 @@ public class User extends GenericObject {
 
 	// Many to Many Un proyecto puede tener muchos usuarios y un usuario puede tener
 	// muchos proyectos
-	
-	@JoinTable(name = "USER_PROJECT", joinColumns = { @JoinColumn(name = "USER_ID") }, 
-	inverseJoinColumns = { @JoinColumn(name = "PROJECT_ID") })
-	@ManyToMany(cascade = { CascadeType.ALL })
-	
-	private Set<Project> projects;
+	@JoinTable(name = "REL_USER_PROJECT", joinColumns = @JoinColumn(name = "USER_ID"), 
+	inverseJoinColumns = @JoinColumn(name = "PROJECT_ID")
+	)
+	@ManyToMany(cascade = CascadeType.ALL )
+	@JsonIgnore
+	private Set<Project> projects;// = new HashSet<>();
 
 	// Un usuario puede tener muchas tareas.
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Task> tasks;
-
+	
 	public String getName() {
 		return name;
 	}

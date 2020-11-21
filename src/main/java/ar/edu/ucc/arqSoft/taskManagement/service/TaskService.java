@@ -29,8 +29,16 @@ public class TaskService {
 			throw new BadRequestException();
 		}
 		Task task = taskDao.load(id);
-
+		
         TaskResponseDto response = (TaskResponseDto) new ModelDtoConverter().convertToDto(task, new TaskResponseDto());
+       /* 
+        response.setName(task.getName());
+        response.setDescription(task.getDescription());
+        response.setProject(task.getProject());
+        response.setState(task.getState());
+        response.setUser(task.getUser());*/
+     
+        
         return response;
 	}
 	

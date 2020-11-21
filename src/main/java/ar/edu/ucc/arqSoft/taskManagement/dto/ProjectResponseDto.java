@@ -3,6 +3,7 @@ package ar.edu.ucc.arqSoft.taskManagement.dto;
 import java.util.Set;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
+import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 import ar.edu.ucc.arqSoft.taskManagement.model.State;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
@@ -18,6 +19,8 @@ public class ProjectResponseDto implements DtoEntity{
 	private Set<User> users;
 
 	private Set<Task> tasks;
+	
+	private Set<Comment> comments;
 	
 	public Set<User> getUsers() {
 		return users;
@@ -58,6 +61,14 @@ public class ProjectResponseDto implements DtoEntity{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 	
 }
