@@ -1,5 +1,7 @@
 package ar.edu.ucc.arqSoft.taskManagement.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +16,7 @@ import ar.edu.ucc.arqSoft.common.dto.GenericExceptionDto;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
+import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.service.ProjectService;
 
 @Controller
@@ -38,5 +41,13 @@ public class ProjectController {
 			return new ResponseEntity<Object>(exDto, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(method= RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+
+    public @ResponseBody List<ProjectResponseDto> getAllProjects()
+    {
+        return projectService.getAllProyects();
+    }
+	
 
 }

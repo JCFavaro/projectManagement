@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.JoinColumn;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
@@ -42,9 +45,11 @@ public class User extends GenericObject {
 
 	// Many to Many Un proyecto puede tener muchos usuarios y un usuario puede tener
 	// muchos proyectos
+	
+	@JoinTable(name = "USER_PROJECT", joinColumns = { @JoinColumn(name = "USER_ID") }, 
+	inverseJoinColumns = { @JoinColumn(name = "PROJECT_ID") })
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "USER_PROJECT", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "PROJECT_ID") })
+	
 	private Set<Project> projects;
 
 	// Un usuario puede tener muchas tareas.

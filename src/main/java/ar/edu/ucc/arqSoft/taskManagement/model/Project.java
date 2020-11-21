@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
@@ -29,6 +31,7 @@ public class Project extends GenericObject{
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
+
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
 	private Set<Comment> comments;
 	
@@ -38,7 +41,7 @@ public class Project extends GenericObject{
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STATE_ID")
 	private State state;
-
+    
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
 	private Set<Task> tasks;
 	

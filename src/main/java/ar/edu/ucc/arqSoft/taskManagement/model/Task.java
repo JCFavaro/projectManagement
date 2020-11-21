@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
@@ -34,7 +36,6 @@ public class Task extends GenericObject{
 	
 	//private Set<User> historicalUsers; // Cuando reasignamos la tarea, es bueno saber quien 
 										//la tenia asignada antes.
-	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STATE_ID")
 	private State state;
