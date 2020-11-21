@@ -11,26 +11,18 @@ public class TaskRequestDto implements DtoEntity{
 	
 	private String description;
 	
-	private User user;
+	private Long userId;
 	
-	private Project project;
+	private Long projectId;
 	
-	private State state;
+	private Long stateId;
 
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -41,20 +33,32 @@ public class TaskRequestDto implements DtoEntity{
 		this.description = description;
 	}
 
-	public State getState() {
-		return state;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setState(State state) {
-		this.state = state;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
+
+	public Long getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+
+
+
+	
 	
 }

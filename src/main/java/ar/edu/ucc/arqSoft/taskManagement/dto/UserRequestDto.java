@@ -16,9 +16,9 @@ public class UserRequestDto implements DtoEntity{
 	
 	private String email;
 	
-	private Set<Project> projects;
+	private Long projectId;
 	
-	private Set<Task> tasks;
+	private Long taskId;
 
 	public String getName() {
 		return name;
@@ -52,20 +52,22 @@ public class UserRequestDto implements DtoEntity{
 		this.email = email;
 	}
 
-	public Set<Task> getTasks() {
-		return tasks;
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
-	public Set<Project> getProjects() {
-		return projects;
+	public Long getTaskId() {
+		return taskId;
 	}
 
-	public void setProjects(Set<Project> projects) {
-		this.projects = projects;
+	public void setTaskId(Long taskId) {
+		this.taskId = taskId;
 	}
+
+	
 	
 }

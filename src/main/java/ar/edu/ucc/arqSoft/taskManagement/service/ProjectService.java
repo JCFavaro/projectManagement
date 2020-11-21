@@ -31,15 +31,6 @@ public class ProjectService {
 
 		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
 				new ProjectResponseDto());
-	/*	
-		response.setName(project.getName());
-		response.setDescription(project.getDescription());
-		response.setComments(project.getComments());
-		response.setTasks(project.getTasks());
-		response.setState(project.getState());
-		response.setUsers(project.getUsers());*/
-		
-		
 		return response;
 	}
 
@@ -58,6 +49,8 @@ public class ProjectService {
 	public ProjectResponseDto registerProject(ProjectRequestDto dto) {
 
 		Project project = new Project();
+		
+		
 
 		projectDao.insert(project);
 
