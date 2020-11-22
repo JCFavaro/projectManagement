@@ -14,6 +14,7 @@ import ar.edu.ucc.arqSoft.taskManagement.dao.ProjectDao;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Project;
+import ar.edu.ucc.arqSoft.taskManagement.model.State;
 
 @Service
 @Transactional
@@ -50,15 +51,17 @@ public class ProjectService {
 
 		Project project = new Project();
 		
+		State CreatedState = State.CREADO;
+		
 		projectDao.insert(project);
 
 		ProjectResponseDto response = new ProjectResponseDto();
 
 		response.setName(project.getName());
 		response.setDescription(project.getDescription());
-		//Como poner como estado automaticamente 'Creado'
-		response.setState(project.getState());
+		response.setState(CreatedState);
 
 		return response;
 	}
+	
 }

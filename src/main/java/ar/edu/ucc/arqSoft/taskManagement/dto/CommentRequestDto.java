@@ -8,10 +8,6 @@ public class CommentRequestDto implements DtoEntity{
 	
 	private String description;
 	
-	private Long taskId;
-
-	private Long projectId;
-
 	public String getTitle() {
 		return title;
 	}
@@ -27,23 +23,4 @@ public class CommentRequestDto implements DtoEntity{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public Long getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(Long taskId) {
-		this.taskId = taskId;
-	}
-
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
-	}
-
-	
-
 }

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,8 +38,7 @@ public class Task extends GenericObject {
 	private Set<Comment> comments;
 
 	// Una tarea puede ser asignada a un solo usuario
-	//@OneToOne(fetch = FetchType.LAZY)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
 	private User user;
@@ -46,8 +47,8 @@ public class Task extends GenericObject {
 	// saber quien
 	// la tenia asignada antes.
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "STATE_ID")
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "STATE")
 	@JsonIgnore
 	private State state;
 

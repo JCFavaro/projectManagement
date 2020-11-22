@@ -1,7 +1,5 @@
 package ar.edu.ucc.arqSoft.taskManagement.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,17 +41,10 @@ public class TaskController {
 			return new ResponseEntity<Object>(exDto, HttpStatus.BAD_REQUEST);
 		}
 	}
-
-	
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<TaskResponseDto> getAllTasks() {
-		return taskService.getAllTasks();
-	}
-
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public @ResponseBody TaskResponseDto register(@RequestBody TaskRequestDto request)
+	public @ResponseBody TaskResponseDto registerTask(@RequestBody TaskRequestDto request)
 			throws EntityNotFoundException, BadRequestException {
 		return taskService.registerTask(request);
 	}
