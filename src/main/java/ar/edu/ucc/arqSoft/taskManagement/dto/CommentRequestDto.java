@@ -1,8 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
-import ar.edu.ucc.arqSoft.taskManagement.model.Project;
-import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 
 public class CommentRequestDto implements DtoEntity{
 

@@ -17,7 +17,6 @@ import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
 import ar.edu.ucc.arqSoft.taskManagement.dto.TaskRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.TaskResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
-import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
 
 @Service
@@ -26,11 +25,11 @@ public class TaskService {
 
 	@Autowired
 	private TaskDao taskDao;
-	
+	@Autowired
 	private ProjectDao projectDao; 
-	
+	@Autowired
 	private UserDao userDao; 
-	
+	@Autowired
 	private StateDao stateDao; 
 	
 	public TaskResponseDto getTaskById(Long id) throws EntityNotFoundException, BadRequestException {

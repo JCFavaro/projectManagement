@@ -45,10 +45,8 @@ public class User extends GenericObject {
 
 	// Many to Many Un proyecto puede tener muchos usuarios y un usuario puede tener
 	// muchos proyectos
-	@JoinTable(name = "REL_USER_PROJECT", joinColumns = @JoinColumn(name = "USER_ID"), 
-	inverseJoinColumns = @JoinColumn(name = "PROJECT_ID")
-	)
-	@ManyToMany(cascade = CascadeType.ALL )
+	@JoinTable(name = "REL_USER_PROJECT", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PROJECT_ID"))
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Project> projects;// = new HashSet<>();
 
@@ -56,7 +54,7 @@ public class User extends GenericObject {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Task> tasks;
-	
+
 	public String getName() {
 		return name;
 	}

@@ -8,13 +8,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import ar.edu.ucc.arqSoft.common.dto.GenericExceptionDto;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
+import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.service.ProjectService;
 
@@ -48,5 +51,11 @@ public class ProjectController {
         return projectService.getAllProyects();
     }
 	
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public @ResponseBody ProjectResponseDto register(@RequestBody ProjectRequestDto request)
+			throws EntityNotFoundException, BadRequestException {
+		return projectService.registerProject(request);
+	}
 
 }

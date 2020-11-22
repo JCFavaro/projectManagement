@@ -50,20 +50,15 @@ public class ProjectService {
 
 		Project project = new Project();
 		
-		
-
 		projectDao.insert(project);
 
 		ProjectResponseDto response = new ProjectResponseDto();
 
 		response.setName(project.getName());
 		response.setDescription(project.getDescription());
-		response.setUsers(project.getUsers());
-		response.setTasks(project.getTasks());
+		//Como poner como estado automaticamente 'Creado'
 		response.setState(project.getState());
 
 		return response;
-
 	}
-
 }

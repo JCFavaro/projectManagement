@@ -1,9 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
-import ar.edu.ucc.arqSoft.taskManagement.model.Project;
-import ar.edu.ucc.arqSoft.taskManagement.model.State;
-import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
 public class TaskRequestDto implements DtoEntity{
 
@@ -57,8 +54,5 @@ public class TaskRequestDto implements DtoEntity{
 		this.stateId = stateId;
 	}
 
-
-
-	
 	
 }

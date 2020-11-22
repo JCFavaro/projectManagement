@@ -6,12 +6,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
 @Table (name = "STATE")
 public class State extends GenericObject{
 
+	@JsonIgnore
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "NAME")

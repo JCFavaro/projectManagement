@@ -1,10 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
-import java.util.Set;
-
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
-import ar.edu.ucc.arqSoft.taskManagement.model.Project;
-import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 
 public class UserRequestDto implements DtoEntity{
 
@@ -16,10 +12,6 @@ public class UserRequestDto implements DtoEntity{
 	
 	private String email;
 	
-	private Long projectId;
-	
-	private Long taskId;
-
 	public String getName() {
 		return name;
 	}
@@ -51,23 +43,6 @@ public class UserRequestDto implements DtoEntity{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
-	}
-
-	public Long getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(Long taskId) {
-		this.taskId = taskId;
-	}
-
 	
 	
 }

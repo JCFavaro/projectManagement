@@ -18,43 +18,44 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
-@Table (name = "TASK")
-public class Task extends GenericObject{
-	
+@Table(name = "TASK")
+public class Task extends GenericObject {
+
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "NAME")
 	private String name;
-	
-	
+
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
-	@OneToMany(mappedBy="task", fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Comment> comments;
-	
-	//Una tarea puede ser asignada a un solo usuario
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="USER_ID")
+
+	// Una tarea puede ser asignada a un solo usuario
+	//@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
 	private User user;
+
+	// private Set<User> historicalUsers; // Cuando reasignamos la tarea, es bueno
+	// saber quien
+	// la tenia asignada antes.
 	
-	//private Set<User> historicalUsers; // Cuando reasignamos la tarea, es bueno saber quien 
-										//la tenia asignada antes.
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="STATE_ID")
+	@JoinColumn(name = "STATE_ID")
 	@JsonIgnore
 	private State state;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="PROJECT_ID")
+	@JoinColumn(name = "PROJECT_ID")
 	@JsonIgnore
 	private Project project;
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -103,11 +104,10 @@ public class Task extends GenericObject{
 		this.state = state;
 	}
 
-/*	public Set<User> getHistoricalUsers() {
-		return historicalUsers;
-	}
-
-	public void setHistoricalUsers(Set<User> historicalUsers) {
-		this.historicalUsers = historicalUsers;
-	}*/
+	/*
+	 * public Set<User> getHistoricalUsers() { return historicalUsers; }
+	 * 
+	 * public void setHistoricalUsers(Set<User> historicalUsers) {
+	 * this.historicalUsers = historicalUsers; }
+	 */
 }
