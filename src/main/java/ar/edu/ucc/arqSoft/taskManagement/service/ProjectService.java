@@ -64,4 +64,13 @@ public class ProjectService {
 		return response;
 	}
 	
+	
+	/*private Map<Long, Project> projectMap = new HashMap<>();
+	
+	public ProjectResponseDto assignUser(Project project) {
+		
+		projectMap.put(project.getId(), project);
+		
+	}
+	*/
 }
