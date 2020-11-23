@@ -1,12 +1,7 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
-import java.util.Set;
-
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
-import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 import ar.edu.ucc.arqSoft.taskManagement.model.State;
-import ar.edu.ucc.arqSoft.taskManagement.model.Task;
-import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
 public class ProjectRequestDto implements DtoEntity {
 
@@ -15,28 +10,6 @@ public class ProjectRequestDto implements DtoEntity {
 	private String description;
 	
 	private State state;
-
-	private Set<User> users;
-
-	private Set<Task> tasks;
-	
-	private Set<Comment> comments;
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-	public Set<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
 
 	public String getName() {
 		return name;
@@ -62,11 +35,4 @@ public class ProjectRequestDto implements DtoEntity {
 		this.state = state;
 	}
 
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
 }

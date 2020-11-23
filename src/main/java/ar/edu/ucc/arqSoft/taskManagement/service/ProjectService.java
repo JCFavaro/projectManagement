@@ -27,7 +27,7 @@ public class ProjectService {
 		if (id <= 0) {
 			throw new BadRequestException();
 		}
-		
+
 		Project project = projectDao.load(id);
 
 		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
@@ -50,27 +50,30 @@ public class ProjectService {
 	public ProjectResponseDto registerProject(ProjectRequestDto dto) {
 
 		Project project = new Project();
-		
-		State CreatedState = State.CREADO;
-		
+
+		project.setComments(null);
+		project.setUsers(null);
+		project.setTasks(null);
+		project.setState(State.CREADO);
+
 		projectDao.insert(project);
 
 		ProjectResponseDto response = new ProjectResponseDto();
 
 		response.setName(project.getName());
 		response.setDescription(project.getDescription());
-		response.setState(CreatedState);
 
 		return response;
 	}
 	
-	
-	/*private Map<Long, Project> projectMap = new HashMap<>();
-	
-	public ProjectResponseDto assignUser(Project project) {
+	public ProjectResponseDto assignUser(ProjectResponseDto dto) {
 		
-		projectMap.put(project.getId(), project);
+		Project project = new Project();
+		
+		dto.setUsers(project.getUsers());
+		
+		return dto;
 		
 	}
-	*/
+	
 }

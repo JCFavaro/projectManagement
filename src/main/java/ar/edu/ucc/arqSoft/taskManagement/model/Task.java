@@ -37,24 +37,16 @@ public class Task extends GenericObject {
 	@JsonIgnore
 	private Set<Comment> comments;
 
-	// Una tarea puede ser asignada a un solo usuario
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
-	@JsonIgnore
 	private User user;
 
-	// private Set<User> historicalUsers; // Cuando reasignamos la tarea, es bueno
-	// saber quien
-	// la tenia asignada antes.
-	
 	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATE")
-	@JsonIgnore
 	private State state;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_ID")
-	@JsonIgnore
 	private Project project;
 
 	public String getName() {

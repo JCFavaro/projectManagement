@@ -25,5 +25,5 @@ public class ProjectImpDao extends GenericImpDao<Project, Long> implements Proje
 		
 		return em.createQuery(criteria).getResultList();
 	}
-
+	
 }

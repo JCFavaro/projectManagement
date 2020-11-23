@@ -37,11 +37,10 @@ public class Project extends GenericObject{
 	
 	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<User> users; //= new HashSet<>();
+	private Set<User> users;
 	
 	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATE")
-	@JsonIgnore
 	private State state;
 	
 	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)

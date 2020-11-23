@@ -9,7 +9,6 @@ import ar.edu.ucc.arqSoft.common.dto.ModelDtoConverter;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dao.CommentDao;
-import ar.edu.ucc.arqSoft.taskManagement.dto.CommentRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.CommentResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 
@@ -30,36 +29,6 @@ public class CommentService {
 		CommentResponseDto response = (CommentResponseDto) new ModelDtoConverter().convertToDto(comment,
 				new CommentResponseDto());
 		return response;
-	}
-
-	public CommentResponseDto registerCommentToProject(CommentRequestDto dto) {
-
-		Comment comment = new Comment();
-
-		commentDao.insert(comment);
-
-		CommentResponseDto response = new CommentResponseDto();
-
-		response.setDescription(comment.getDescription());
-		response.setTitle(comment.getTitle());
-
-		return response;
-
-	}
-
-	public CommentResponseDto registerCommentToTask(CommentRequestDto dto) {
-
-		Comment comment = new Comment();
-
-		commentDao.insert(comment);
-
-		CommentResponseDto response = new CommentResponseDto();
-
-		response.setDescription(comment.getDescription());
-		response.setTitle(comment.getTitle());
-
-		return response;
-
 	}
 
 }

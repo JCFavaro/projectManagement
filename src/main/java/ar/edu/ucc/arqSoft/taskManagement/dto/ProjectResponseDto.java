@@ -4,7 +4,6 @@ import java.util.Set;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
 import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
-import ar.edu.ucc.arqSoft.taskManagement.model.State;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
 
@@ -14,30 +13,13 @@ public class ProjectResponseDto implements DtoEntity{
 	
 	private String description;
 	
-	private State state;
+	private String state;
 	
 	private Set<User> users;
-
-	private Set<Task> tasks;
 	
 	private Set<Comment> comments;
 	
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-	public Set<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
-
+	private Set<Task> tasks;
 	
 	public String getName() {
 		return name;
@@ -55,12 +37,20 @@ public class ProjectResponseDto implements DtoEntity{
 		this.description = description;
 	}
 
-	public State getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public Set<Comment> getComments() {
@@ -69,6 +59,14 @@ public class ProjectResponseDto implements DtoEntity{
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
 }

@@ -44,5 +44,4 @@ public class UserRequestDto implements DtoEntity{
 		this.email = email;
 	}
 	
-	
 }
