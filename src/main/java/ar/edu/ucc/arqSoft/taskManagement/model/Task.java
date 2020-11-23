@@ -4,8 +4,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,12 +35,12 @@ public class Task extends GenericObject {
 	@JsonIgnore
 	private Set<Comment> comments;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="USER_ID", nullable = true)
 	private User user;
-
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATE")
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "STATE_ID")
 	private State state;
 
 	@ManyToOne(fetch = FetchType.LAZY)

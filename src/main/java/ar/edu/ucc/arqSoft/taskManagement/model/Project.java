@@ -4,11 +4,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,35 +18,35 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
 @Entity
-@Table (name = "PROJECT")
-public class Project extends GenericObject{
+@Table(name = "PROJECT")
+public class Project extends GenericObject {
 
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "NAME")
 	private String name;
-	
+
 	@NotNull
 	@Size(min = 1, max = 250)
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Comment> comments;
-	
+
 	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<User> users;
-	
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATE")
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "STATE_ID")
 	private State state;
-	
-	@OneToMany(mappedBy="project", fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Task> tasks;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -71,8 +71,16 @@ public class Project extends GenericObject{
 		this.comments = comments;
 	}
 
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+	}
+
 	public Set<User> getUsers() {
 		return users;
+	}
+
+	public void addUser(User user) {
+		this.users.add(user);
 	}
 
 	public void setUsers(Set<User> users) {
@@ -86,12 +94,16 @@ public class Project extends GenericObject{
 	public void setState(State state) {
 		this.state = state;
 	}
-	
+
 	public Set<Task> getTasks() {
 		return tasks;
 	}
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public void addTask(Task task) {
+		this.tasks.add(task);
 	}
 }

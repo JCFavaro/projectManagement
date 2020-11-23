@@ -11,10 +11,13 @@ import ar.edu.ucc.arqSoft.common.dto.ModelDtoConverter;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dao.ProjectDao;
+import ar.edu.ucc.arqSoft.taskManagement.dao.StateDao;
+import ar.edu.ucc.arqSoft.taskManagement.dao.TaskDao;
+import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
+import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 import ar.edu.ucc.arqSoft.taskManagement.model.Project;
-import ar.edu.ucc.arqSoft.taskManagement.model.State;
 
 @Service
 @Transactional
@@ -22,6 +25,15 @@ public class ProjectService {
 
 	@Autowired
 	private ProjectDao projectDao;
+
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private TaskDao taskDao;
+
+	@Autowired
+	private StateDao stateDao;
 
 	public ProjectResponseDto getProjectById(Long id) throws EntityNotFoundException, BadRequestException {
 		if (id <= 0) {
@@ -51,10 +63,23 @@ public class ProjectService {
 
 		Project project = new Project();
 
-		project.setComments(null);
-		project.setUsers(null);
-		project.setTasks(null);
-		project.setState(State.CREADO);
+		Comment comment = new Comment("Creado", "Proyecto creado");
+
+		if (dto.getUserID() != null) {
+			project.addUser(userDao.load(dto.getUserID()));
+			project.setState(stateDao.load((long) 2)); // 1 = 'Asignado'
+		} else {
+			project.setUsers(null);
+			project.setState(stateDao.load((long) 1)); // 1 = 'Creado'
+		}
+
+		if (dto.getTaskID() != null) {
+			project.addTask(taskDao.load(dto.getTaskID()));
+		} else {
+			project.setTasks(null);
+		}
+
+		project.addComment(comment);
 
 		projectDao.insert(project);
 
@@ -65,15 +90,65 @@ public class ProjectService {
 
 		return response;
 	}
-	
-	public ProjectResponseDto assignUser(ProjectResponseDto dto) {
+
+	public ProjectResponseDto assignUser(Long projectID, long userID) {
+		Project project = projectDao.load(projectID);
+
+		Comment comment = new Comment("Usuario asignado", "Se ha asignado el usuario " + userDao.findByID(userID));
 		
-		Project project = new Project();
+		project.addUser(userDao.load(userID));
+		project.setState(stateDao.load((long) 2)); // 2 = 'Asignado'
+		project.addComment(comment);
+
+		projectDao.insert(project);
+
+		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
+				new ProjectResponseDto());
+
+		response.setName(project.getName());
+		response.setDescription(project.getDescription());
+
+		return response;
+	}
+
+	public ProjectResponseDto assignTask(Long projectID, long taskID) {
+		Project project = projectDao.load(projectID);
+
+		Comment comment = new Comment("Tarea asignada", "Se ha asignado la tarea " + taskDao.findByID(taskID));
+
+		project.addTask(taskDao.load(taskID));
+		project.addComment(comment);
+
+		projectDao.insert(project);
+
+		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
+				new ProjectResponseDto());
 		
-		dto.setUsers(project.getUsers());
-		
-		return dto;
-		
+		response.setName(project.getName());
+		response.setDescription(project.getDescription());
+
+
+		return response;
 	}
 	
+	public ProjectResponseDto changeState(Long projectID, Long stateID) throws BadRequestException {
+		if(stateID <= 0 || stateID > 6) {
+			throw new BadRequestException();
+		}
+		
+		Project project = projectDao.load(projectID);
+		
+		Comment comment = new Comment("Estado actualizado", "Se ha actualizado el estado del proyecto.");
+
+		project.setState(stateDao.load(stateID));
+
+		projectDao.update(project);
+
+		ProjectResponseDto response = new ProjectResponseDto();
+
+		response.setComments(comment);
+		
+		return response;
+	}
+
 }

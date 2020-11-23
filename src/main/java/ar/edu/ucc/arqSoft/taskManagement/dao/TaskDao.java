@@ -9,4 +9,6 @@ public interface TaskDao extends GenericDao<Task, Long>{
 
 	public List<Task> findByName(String name);
 	
+	public Task findByID(Long id);
+	
 }

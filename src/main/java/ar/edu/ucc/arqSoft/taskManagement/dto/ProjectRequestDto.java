@@ -10,6 +10,12 @@ public class ProjectRequestDto implements DtoEntity {
 	private String description;
 	
 	private State state;
+	
+	private Long stateID;
+	
+	private Long userID;
+	
+	private Long taskID;
 
 	public String getName() {
 		return name;
@@ -33,6 +39,30 @@ public class ProjectRequestDto implements DtoEntity {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public Long getStateID() {
+		return stateID;
+	}
+
+	public void setStateID(Long stateID) {
+		this.stateID = stateID;
+	}
+
+	public Long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Long userID) {
+		this.userID = userID;
+	}
+
+	public Long getTaskID() {
+		return taskID;
+	}
+
+	public void setTaskID(Long taskID) {
+		this.taskID = taskID;
 	}
 
 }

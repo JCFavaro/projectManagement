@@ -25,4 +25,15 @@ public class UserImpDao extends GenericImpDao<User, Long> implements UserDao{
 		return em.createQuery(criteria).getResultList();
 	}
 	
+	@Override
+	public User findByID(Long id) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<User> criteria = builder.createQuery(User.class);
+		Root<User> entity = criteria.from(User.class);
+		
+		criteria.select(entity).where(builder.equal(entity.get("name"), id));
+		
+		return em.createQuery(criteria).getSingleResult();
+	}
+	
 }

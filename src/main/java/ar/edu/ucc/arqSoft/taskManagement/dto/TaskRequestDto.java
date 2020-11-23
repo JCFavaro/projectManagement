@@ -12,6 +12,8 @@ public class TaskRequestDto implements DtoEntity{
 	
 	private Long projectId;
 	
+	private Long stateID;
+	
 	public String getName() {
 		return name;
 	}
@@ -42,6 +44,14 @@ public class TaskRequestDto implements DtoEntity{
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
+	}
+
+	public Long getStateID() {
+		return stateID;
+	}
+
+	public void setStateID(Long stateID) {
+		this.stateID = stateID;
 	}
 	
 }

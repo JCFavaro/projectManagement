@@ -37,6 +37,11 @@ public class Comment extends GenericObject{
 	@JsonIgnore
 	private Project project;
 	
+	public Comment(String title, String description) {
+		this.title = title;
+		this.description = description;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -51,5 +56,23 @@ public class Comment extends GenericObject{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Task getTask() {
+		return task;
+	}
+
+	public void setTask(Task task) {
+		this.task = task;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}	
+	
+	
 }

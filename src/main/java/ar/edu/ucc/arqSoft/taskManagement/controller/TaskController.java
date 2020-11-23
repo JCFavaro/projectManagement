@@ -41,12 +41,26 @@ public class TaskController {
 			return new ResponseEntity<Object>(exDto, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public @ResponseBody TaskResponseDto registerTask(@RequestBody TaskRequestDto request)
 			throws EntityNotFoundException, BadRequestException {
 		return taskService.registerTask(request);
+	}
+
+	@RequestMapping(value = "/{taskID}/changeuser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Object> changeUser(@PathVariable("taskID") Long taskID,
+			@RequestBody Long userID) throws EntityNotFoundException, BadRequestException {
+		TaskResponseDto dto = taskService.changeUser(taskID, userID);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{taskID}/changestate", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Object> changeState(@PathVariable("taskID") Long taskID,
+			@RequestBody Long stateID) throws EntityNotFoundException, BadRequestException {
+		TaskResponseDto dto = taskService.changeState(taskID, stateID);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
 	}
 
 }

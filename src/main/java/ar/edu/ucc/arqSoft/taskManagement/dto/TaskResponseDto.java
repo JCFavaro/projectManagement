@@ -57,8 +57,8 @@ public class TaskResponseDto implements DtoEntity {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
+	public void setComments(Comment comment) {
+		this.comments.add(comment);
 	}
 
 	public Project getProject() {

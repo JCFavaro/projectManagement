@@ -55,26 +55,25 @@ public class ProjectController {
 			throws EntityNotFoundException, BadRequestException {
 		return projectService.registerProject(request);
 	}
-	
-	@RequestMapping(value = "/{id}/assignuser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Object> assignUser(@PathVariable("id") Long id) {
-		try {
 
-			ProjectResponseDto dto = projectService.getProjectById(id);
-			
-			projectService.assignUser(dto);
-			
-			return new ResponseEntity<Object>(dto, HttpStatus.OK);
-
-		} catch (EntityNotFoundException e) {
-			GenericExceptionDto exDto = new GenericExceptionDto("1001", "Project not found");
-			return new ResponseEntity<Object>(exDto, HttpStatus.NOT_FOUND);
-		} catch (BadRequestException e) {
-			GenericExceptionDto exDto = new GenericExceptionDto("1002", "No se entendió que buscar");
-			return new ResponseEntity<Object>(exDto, HttpStatus.BAD_REQUEST);
-		}
+	@RequestMapping(value = "/{projectID}/assignUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Object> assignUser(@PathVariable("projectID") Long projectID, @RequestBody Long userID)
+			throws EntityNotFoundException, BadRequestException {
+		ProjectResponseDto dto = projectService.assignUser(projectID, userID);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/{projectID}/assigntask", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Object> assignTask(@PathVariable("projectID") Long projectID, @RequestBody Long taskID)
+			throws EntityNotFoundException, BadRequestException {
+		ProjectResponseDto dto = projectService.assignTask(projectID, taskID);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
+	}
 	
-
+	@RequestMapping(value = "/{projectID}/changestate", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Object> changeState(@PathVariable("projectID") Long projectID,
+			@RequestBody Long stateID) throws EntityNotFoundException, BadRequestException {
+		ProjectResponseDto dto = projectService.changeState(projectID, stateID);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
+	}
 }

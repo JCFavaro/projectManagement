@@ -24,5 +24,16 @@ public class TaskImpDao extends GenericImpDao<Task, Long> implements TaskDao{
 		
 		return em.createQuery(criteria).getResultList();
 	}
+	
+	@Override
+	public Task findByID(Long id) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Task> criteria = builder.createQuery(Task.class);
+		Root<Task> entity = criteria.from(Task.class);
+		
+		criteria.select(entity).where(builder.equal(entity.get("name"), id));
+		
+		return em.createQuery(criteria).getSingleResult();
+	}
 
 }
