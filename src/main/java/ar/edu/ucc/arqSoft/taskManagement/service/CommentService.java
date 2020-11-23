@@ -46,26 +46,41 @@ public class CommentService {
 		Comment comment = new Comment(null, null);
 
 		Task task = taskDao.load(dto.getTaskID());
-		
+
 		Project project = projectDao.load(dto.getProjectID());
 
-		//Si se pasa el id del proyecto y la tarea, valido que esa tarea pertenezca al proyecto.
+		// Si se pasa el id del proyecto y la tarea, valido que esa tarea pertenezca al
+		// proyecto.
 		if (dto.getProjectID() != null && dto.getTaskID() != null && task.getProject().getId() == dto.getProjectID()) {
+			
+			//Si el estado del proyecto y la tarea no es Cerrado ni Terminado
+			if (project.getState().getName() == "Cerrado" || project.getState().getName() == "Terminado"
+					|| task.getState().getName() == "Cerrado" || task.getState().getName() == "Terminado") {
+				
+				comment.setProject(project);
+				comment.setTask(task);
+				
+			}
+			//Si solo pasan el proyecto y el estado no es cerrado ni terminado
+		} else if (dto.getProjectID() != null && dto.getTaskID() == null && project.getState().getName() != "Cerrado"
+				|| project.getState().getName() != "Terminado") {
+			
 			comment.setProject(project);
+			//Si solo pasan la tarea y el estado no es cerrado ni terminado
+		} else if (dto.getProjectID() == null && dto.getTaskID() != null && task.getState().getName() != "Cerrado"
+				|| task.getState().getName() != "Terminado") {
+			
 			comment.setTask(task);
-		} else if(dto.getProjectID() != null && dto.getTaskID() == null) {
-			comment.setProject(project);
-		} else if(dto.getProjectID() == null && dto.getTaskID() != null) {
-			comment.setTask(task);
+			
 		} else {
 			throw new BadRequestException();
 		}
-		
+
 		CommentResponseDto response = new CommentResponseDto();
-		
+
 		response.setTitle(comment.getTitle());
 		response.setDescription(comment.getDescription());
-		
+
 		return response;
 	}
 }
