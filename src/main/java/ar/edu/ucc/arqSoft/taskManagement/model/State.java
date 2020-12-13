@@ -6,9 +6,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import ar.edu.ucc.arqSoft.common.model.GenericObject;
+
 @Entity
-@Table (name = "STATE")
-public class State {
+@Table(name = "STATE")
+public class State extends GenericObject {
 
 	@NotNull
 	@Size(min = 1, max = 250)
