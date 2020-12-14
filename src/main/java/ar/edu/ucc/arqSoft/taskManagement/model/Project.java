@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,7 +14,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
@@ -32,19 +38,15 @@ public class Project extends GenericObject {
 	private String description;
 
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<Comment> comments;
 
 	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private Set<User> users;
+	private Set<User> users = new HashSet<>();
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "STATE_ID")
 	private State state;
 
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<Task> tasks;
 
 	public String getName() {

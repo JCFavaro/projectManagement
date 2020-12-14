@@ -19,7 +19,7 @@ import ar.edu.ucc.arqSoft.taskManagement.model.State;
 public class StateService {
 
 	@Autowired
-	StateDao stateDao;
+	private StateDao stateDao;
 
 	public StateResponseDto getStateById(Long id) throws EntityNotFoundException, BadRequestException {
 		if (id <= 0) {

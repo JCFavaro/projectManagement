@@ -43,7 +43,7 @@ public class CommentService {
 	}
 
 	public CommentResponseDto addComment(CommentRequestDto dto) throws BadRequestException {
-		Comment comment = new Comment(null, null);
+		Comment comment = new Comment();
 
 		Task task = taskDao.load(dto.getTaskID());
 

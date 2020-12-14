@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.JoinColumn;
 
@@ -45,12 +51,10 @@ public class User extends GenericObject {
 
 	@JoinTable(name = "REL_USER_PROJECT", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PROJECT_ID"))
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Set<Project> projects;
+	private Set<Project> projects = new HashSet<>();
 
 	// Un usuario puede tener muchas tareas.
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<Task> tasks;
 
 	public String getName() {

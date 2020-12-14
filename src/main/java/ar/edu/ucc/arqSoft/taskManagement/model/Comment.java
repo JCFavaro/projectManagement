@@ -9,7 +9,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
@@ -29,18 +32,16 @@ public class Comment extends GenericObject{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="TASK_ID")
-	@JsonIgnore
 	private Task task;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="PROJECT_ID")
-	@JsonIgnore
 	private Project project;
 	
-	public Comment(String title, String description) {
+	/*public Comment(String title, String description) {
 		this.title = title;
 		this.description = description;
-	}
+	}*/
 
 	public String getTitle() {
 		return title;

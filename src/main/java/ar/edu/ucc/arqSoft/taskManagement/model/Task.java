@@ -13,7 +13,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
@@ -32,19 +37,15 @@ public class Task extends GenericObject {
 	private String description;
 
 	@OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<Comment> comments;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="USER_ID", nullable = true)
 	private User user;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "STATE_ID")
 	private State state;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PROJECT_ID")
 	private Project project;
 
 	public String getName() {

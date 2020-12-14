@@ -63,7 +63,10 @@ public class ProjectService {
 
 		Project project = new Project();
 
-		Comment comment = new Comment("Creado", "Proyecto creado");
+		Comment comment = new Comment();
+		
+		comment.setTitle("Creado");
+		comment.setDescription("Proyecto Creado");
 
 		if (dto.getUserID() != null) {
 			project.addUser(userDao.load(dto.getUserID()));
@@ -94,7 +97,10 @@ public class ProjectService {
 	public ProjectResponseDto assignUser(Long projectID, long userID) {
 		Project project = projectDao.load(projectID);
 
-		Comment comment = new Comment("Usuario asignado", "Se ha asignado el usuario " + userDao.findByID(userID));
+		Comment comment = new Comment();
+		
+		comment.setTitle("Usuario asignado");
+		comment.setDescription("Se ha asignado el usuario " + userDao.findByID(userID));
 		
 		project.addUser(userDao.load(userID));
 		project.setState(stateDao.load((long) 2)); // 2 = 'Asignado'
@@ -114,8 +120,11 @@ public class ProjectService {
 	public ProjectResponseDto assignTask(Long projectID, long taskID) {
 		Project project = projectDao.load(projectID);
 
-		Comment comment = new Comment("Tarea asignada", "Se ha asignado la tarea " + taskDao.findByID(taskID));
+		Comment comment = new Comment();
 
+		comment.setTitle("Tarea Asignada");
+		comment.setDescription("Se ha asignado la tarea " + taskDao.findByID(taskID));
+		
 		project.addTask(taskDao.load(taskID));
 		project.addComment(comment);
 
@@ -138,8 +147,11 @@ public class ProjectService {
 		
 		Project project = projectDao.load(projectID);
 		
-		Comment comment = new Comment("Estado actualizado", "Se ha actualizado el estado del proyecto.");
+		Comment comment = new Comment();
 
+		comment.setTitle("Estado actualizado");
+		comment.setDescription("Se ha actualizado el estado del proyecto");
+		
 		project.setState(stateDao.load(stateID));
 
 		projectDao.update(project);
