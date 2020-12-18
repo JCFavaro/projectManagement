@@ -79,6 +79,10 @@ public class Task extends GenericObject {
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+	}
 
 	public User getUser() {
 		return user;

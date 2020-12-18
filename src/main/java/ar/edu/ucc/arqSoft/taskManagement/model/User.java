@@ -53,7 +53,6 @@ public class User extends GenericObject {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Project> projects = new HashSet<>();
 
-	// Un usuario puede tener muchas tareas.
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Task> tasks;
 

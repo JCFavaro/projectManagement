@@ -13,13 +13,9 @@ public class TaskResponseDto implements DtoEntity {
 
 	private String description;
 
-	private String state;
+	private StateResponseDto state;
 	
-	private Set<Comment> comments;
-	
-	private User user;
-	
-	private Project project;
+	private Set<CommentResponseDto> comments;
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -29,11 +25,11 @@ public class TaskResponseDto implements DtoEntity {
 		return description;
 	}
 
-	public String getState() {
+	public StateResponseDto getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(StateResponseDto state) {
 		this.state = state;
 	}
 
@@ -45,27 +41,7 @@ public class TaskResponseDto implements DtoEntity {
 		this.name = name;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Set<Comment> getComments() {
+	public Set<CommentResponseDto> getComments() {
 		return comments;
-	}
-
-	public void setComments(Comment comment) {
-		this.comments.add(comment);
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
 	}
 }

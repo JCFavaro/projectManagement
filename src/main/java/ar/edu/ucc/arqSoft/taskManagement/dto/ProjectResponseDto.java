@@ -13,13 +13,7 @@ public class ProjectResponseDto implements DtoEntity{
 	
 	private String description;
 	
-	private String state;
-	
-	private Set<User> users;
-	
-	private Set<Comment> comments;
-	
-	private Set<Task> tasks;
+	private StateResponseDto state;
 	
 	public String getName() {
 		return name;
@@ -37,36 +31,12 @@ public class ProjectResponseDto implements DtoEntity{
 		this.description = description;
 	}
 
-	public String getState() {
+	public StateResponseDto getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(StateResponseDto state) {
 		this.state = state;
-	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Comment comment) {
-		this.comments.add(comment);
-	}
-
-	public Set<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
 	}
 	
 }

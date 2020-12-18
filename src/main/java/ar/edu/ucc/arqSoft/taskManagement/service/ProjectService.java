@@ -153,12 +153,11 @@ public class ProjectService {
 		comment.setDescription("Se ha actualizado el estado del proyecto");
 		
 		project.setState(stateDao.load(stateID));
+		project.addComment(comment);
 
 		projectDao.update(project);
 
 		ProjectResponseDto response = new ProjectResponseDto();
-
-		response.setComments(comment);
 		
 		return response;
 	}

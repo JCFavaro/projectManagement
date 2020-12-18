@@ -49,6 +49,11 @@ public class TaskService {
 	public TaskResponseDto registerTask(TaskRequestDto dto) {
 
 		Task task = new Task();
+		
+		Comment comment = new Comment();
+
+		comment.setTitle("Creada");
+		comment.setDescription("Se creo una nueva tarea");
 
 		if (dto.getStateID() != null) {
 			task.setState(stateDao.load(dto.getStateID()));
@@ -65,18 +70,15 @@ public class TaskService {
 
 		task.setProject(projectDao.load(dto.getProjectId()));
 
+		task.addComment(comment);
+		
 		taskDao.insert(task);
 
 		TaskResponseDto response = new TaskResponseDto();
 
-		Comment comment = new Comment();
-
-		comment.setTitle("Creada");
-		comment.setDescription("Se creo una nueva tarea");
 		
 		response.setName(task.getName());
 		response.setDescription(task.getDescription());
-		response.setComments(comment);
 
 		return response;
 	}
@@ -93,6 +95,8 @@ public class TaskService {
 		comment.setTitle("Usuario asignado");
 		comment.setDescription( "Se ha cambiado el usuario para esta tarea");
 		
+		task.addComment(comment);
+		
 		if (!project.getUsers().contains(user)) { // Si el usuario no pertenece al proyecto de la tarea
 			throw new EntityNotFoundException();
 		}
@@ -104,7 +108,6 @@ public class TaskService {
 
 		TaskResponseDto response = new TaskResponseDto();
 
-		response.setComments(comment);
 
 		return response;
 	}
@@ -120,6 +123,8 @@ public class TaskService {
 
 		comment.setTitle("Estado actualizado");
 		comment.setDescription("Se ha actualizado el estado de la tarea.");
+
+		task.addComment(comment);
 		
 		task.setState(stateDao.load(stateID));
 
@@ -127,7 +132,6 @@ public class TaskService {
 
 		TaskResponseDto response = new TaskResponseDto();
 
-		response.setComments(comment);
 		
 		return response;
 	}

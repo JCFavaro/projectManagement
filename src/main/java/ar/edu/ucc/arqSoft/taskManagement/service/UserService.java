@@ -13,6 +13,8 @@ import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
+import ar.edu.ucc.arqSoft.taskManagement.model.Project;
+import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 import ar.edu.ucc.arqSoft.taskManagement.model.User;
 import ar.edu.ucc.arqSoft.common.dto.ModelDtoConverter;
 
@@ -31,6 +33,11 @@ public class UserService {
 
 		UserResponseDto response = (UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto());
 
+		//UserResponseDto response = new UserResponseDto();
+		
+		//response.setDni(user.getDni());
+		//user.getProjects();
+		
 		return response;
 	}
 
