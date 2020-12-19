@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
@@ -15,7 +16,7 @@ public class TaskResponseDto implements DtoEntity {
 
 	private StateResponseDto state;
 	
-	private Set<CommentResponseDto> comments;
+	private List<CommentResponseDto> comments;
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -41,7 +42,11 @@ public class TaskResponseDto implements DtoEntity {
 		this.name = name;
 	}
 
-	public Set<CommentResponseDto> getComments() {
+	public List<CommentResponseDto> getComments() {
 		return comments;
+	}
+
+	public void setComments(List<CommentResponseDto> comments) {
+		this.comments = comments;
 	}
 }

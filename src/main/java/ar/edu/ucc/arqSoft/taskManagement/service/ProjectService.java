@@ -10,14 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.ucc.arqSoft.common.dto.ModelDtoConverter;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
+import ar.edu.ucc.arqSoft.taskManagement.dao.CommentDao;
 import ar.edu.ucc.arqSoft.taskManagement.dao.ProjectDao;
 import ar.edu.ucc.arqSoft.taskManagement.dao.StateDao;
 import ar.edu.ucc.arqSoft.taskManagement.dao.TaskDao;
 import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
+import ar.edu.ucc.arqSoft.taskManagement.dto.CommentResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 import ar.edu.ucc.arqSoft.taskManagement.model.Project;
+import ar.edu.ucc.arqSoft.taskManagement.model.Task;
 
 @Service
 @Transactional
@@ -44,6 +47,7 @@ public class ProjectService {
 
 		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
 				new ProjectResponseDto());
+
 		return response;
 	}
 
@@ -61,104 +65,50 @@ public class ProjectService {
 
 	public ProjectResponseDto registerProject(ProjectRequestDto dto) {
 
-		Project project = new Project();
+		Project project = (Project) new ModelDtoConverter().convertToEntity(new Project(), dto);
 
-		Comment comment = new Comment();
-		
-		comment.setTitle("Creado");
-		comment.setDescription("Proyecto Creado");
-
-		if (dto.getUserID() != null) {
-			project.addUser(userDao.load(dto.getUserID()));
-			project.setState(stateDao.load((long) 2)); // 1 = 'Asignado'
-		} else {
-			project.setUsers(null);
-			project.setState(stateDao.load((long) 1)); // 1 = 'Creado'
-		}
-
-		if (dto.getTaskID() != null) {
-			project.addTask(taskDao.load(dto.getTaskID()));
-		} else {
-			project.setTasks(null);
-		}
-
-		project.addComment(comment);
-
-		projectDao.insert(project);
-
-		ProjectResponseDto response = new ProjectResponseDto();
-
-		response.setName(project.getName());
-		response.setDescription(project.getDescription());
-
-		return response;
-	}
-
-	public ProjectResponseDto assignUser(Long projectID, long userID) {
-		Project project = projectDao.load(projectID);
-
-		Comment comment = new Comment();
-		
-		comment.setTitle("Usuario asignado");
-		comment.setDescription("Se ha asignado el usuario " + userDao.findByID(userID));
-		
-		project.addUser(userDao.load(userID));
-		project.setState(stateDao.load((long) 2)); // 2 = 'Asignado'
-		project.addComment(comment);
+		project.setState(stateDao.load((long) 1)); // 'Creado'
 
 		projectDao.insert(project);
 
 		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
 				new ProjectResponseDto());
 
-		response.setName(project.getName());
-		response.setDescription(project.getDescription());
-
 		return response;
 	}
 
-	public ProjectResponseDto assignTask(Long projectID, long taskID) {
+	public ProjectResponseDto assignUser(long projectID, long userID) throws BadRequestException {
+
 		Project project = projectDao.load(projectID);
 
-		Comment comment = new Comment();
-
-		comment.setTitle("Tarea Asignada");
-		comment.setDescription("Se ha asignado la tarea " + taskDao.findByID(taskID));
-		
-		project.addTask(taskDao.load(taskID));
-		project.addComment(comment);
-
-		projectDao.insert(project);
-
-		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
-				new ProjectResponseDto());
-		
-		response.setName(project.getName());
-		response.setDescription(project.getDescription());
-
-
-		return response;
-	}
-	
-	public ProjectResponseDto changeState(Long projectID, Long stateID) throws BadRequestException {
-		if(stateID <= 0 || stateID > 6) {
+		if (project.getState().getId() == 3 || project.getState().getId() == 4 || project.getState().getId() == 6) {
 			throw new BadRequestException();
 		}
-		
-		Project project = projectDao.load(projectID);
-		
-		Comment comment = new Comment();
 
-		comment.setTitle("Estado actualizado");
-		comment.setDescription("Se ha actualizado el estado del proyecto");
-		
+		project.addUser(userDao.load(userID));
+		project.setState(stateDao.load((long) 2)); // 2 = 'Asignado'
+
+		projectDao.update(project);
+
+		ProjectResponseDto response = (ProjectResponseDto) new ModelDtoConverter().convertToDto(project,
+				new ProjectResponseDto());
+
+		return response;
+	}
+
+	public ProjectResponseDto changeState(Long projectID, Long stateID) throws BadRequestException {
+		if (stateID <= 0 || stateID > 6) {
+			throw new BadRequestException();
+		}
+
+		Project project = projectDao.load(projectID);
+
 		project.setState(stateDao.load(stateID));
-		project.addComment(comment);
 
 		projectDao.update(project);
 
 		ProjectResponseDto response = new ProjectResponseDto();
-		
+
 		return response;
 	}
 

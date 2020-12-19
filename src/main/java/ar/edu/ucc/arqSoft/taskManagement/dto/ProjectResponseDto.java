@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import ar.edu.ucc.arqSoft.common.dto.DtoEntity;
@@ -14,7 +15,7 @@ public class ProjectResponseDto implements DtoEntity{
 	private String description;
 	
 	private StateResponseDto state;
-	
+
 	public String getName() {
 		return name;
 	}

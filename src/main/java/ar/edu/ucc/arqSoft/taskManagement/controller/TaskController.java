@@ -49,7 +49,7 @@ public class TaskController {
 		return taskService.registerTask(request);
 	}
 
-	@RequestMapping(value = "/{taskID}/changeuser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{taskID}/assignuser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Object> changeUser(@PathVariable("taskID") Long taskID,
 			@RequestBody Long userID) throws EntityNotFoundException, BadRequestException {
 		TaskResponseDto dto = taskService.changeUser(taskID, userID);

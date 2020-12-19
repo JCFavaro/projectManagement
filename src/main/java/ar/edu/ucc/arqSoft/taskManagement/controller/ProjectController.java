@@ -56,17 +56,10 @@ public class ProjectController {
 		return projectService.registerProject(request);
 	}
 
-	@RequestMapping(value = "/{projectID}/assignUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{projectID}/assignuser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Object> assignUser(@PathVariable("projectID") Long projectID, @RequestBody Long userID)
 			throws EntityNotFoundException, BadRequestException {
 		ProjectResponseDto dto = projectService.assignUser(projectID, userID);
-		return new ResponseEntity<Object>(dto, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/{projectID}/assigntask", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Object> assignTask(@PathVariable("projectID") Long projectID, @RequestBody Long taskID)
-			throws EntityNotFoundException, BadRequestException {
-		ProjectResponseDto dto = projectService.assignTask(projectID, taskID);
 		return new ResponseEntity<Object>(dto, HttpStatus.OK);
 	}
 	

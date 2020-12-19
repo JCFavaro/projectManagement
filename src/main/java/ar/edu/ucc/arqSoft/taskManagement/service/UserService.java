@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ar.edu.ucc.arqSoft.common.exception.BadRequestException;
 import ar.edu.ucc.arqSoft.common.exception.EntityNotFoundException;
 import ar.edu.ucc.arqSoft.taskManagement.dao.UserDao;
+import ar.edu.ucc.arqSoft.taskManagement.dto.TaskResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.UserResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Project;
@@ -32,11 +33,6 @@ public class UserService {
 		User user = userDao.load(id);
 
 		UserResponseDto response = (UserResponseDto) new ModelDtoConverter().convertToDto(user, new UserResponseDto());
-
-		//UserResponseDto response = new UserResponseDto();
-		
-		//response.setDni(user.getDni());
-		//user.getProjects();
 		
 		return response;
 	}
@@ -55,21 +51,20 @@ public class UserService {
 
 	public UserResponseDto registerUser(UserRequestDto dto) {
 
+		//User user = (User) new ModelDtoConverter().convertToEntity(new User(), dto);
+		
 		User user = new User();
-
-		//Para crear un post se deben inicializar todos los atributos del objeto
-		user.setProjects(null);
-		user.setTasks(null);
+		
+		user.setName(dto.getName());
+		user.setLastName(dto.getLastName());
+		user.setEmail(dto.getEmail());
+		user.setDni(dto.getDni());
 
 		userDao.insert(user);
 
-		UserResponseDto response = new UserResponseDto();
-
-		response.setName(user.getName());
-		response.setLastName(user.getLastName());
-		response.setDni(user.getDni());
-		response.setEmail(user.getEmail());
-
+		UserResponseDto response = (UserResponseDto) new ModelDtoConverter().convertToDto(user,
+				new UserResponseDto());
+		
 		return response;
 	}
 

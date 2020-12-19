@@ -15,12 +15,12 @@ import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 public class CommentImpDao extends GenericImpDao<Comment, Long> implements CommentDao{
 
 	@Override
-	public List<Comment> findByTitle(String title) {
+	public List<Comment> findByTask(Long taskID) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Comment> criteria = builder.createQuery(Comment.class);
 		Root<Comment> entity = criteria.from(Comment.class);
 		
-		criteria.select(entity).where(builder.equal(entity.get("title"), title));
+		criteria.select(entity).where(builder.equal(entity.get("task"), taskID));
 		
 		return em.createQuery(criteria).getResultList();
 	}

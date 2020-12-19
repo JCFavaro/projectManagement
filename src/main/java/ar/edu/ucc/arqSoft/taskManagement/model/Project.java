@@ -1,25 +1,17 @@
 package ar.edu.ucc.arqSoft.taskManagement.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Proxy;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.edu.ucc.arqSoft.common.model.GenericObject;
 
@@ -36,12 +28,9 @@ public class Project extends GenericObject {
 	@Size(min = 1, max = 250)
 	@Column(name = "DESCRIPTION")
 	private String description;
-
-	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-	private Set<Comment> comments;
-
+	
 	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
-	private Set<User> users = new HashSet<>();
+	private Set<User> users;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private State state;
@@ -63,18 +52,6 @@ public class Project extends GenericObject {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public void addComment(Comment comment) {
-		this.comments.add(comment);
 	}
 
 	public Set<User> getUsers() {
@@ -108,4 +85,5 @@ public class Project extends GenericObject {
 	public void addTask(Task task) {
 		this.tasks.add(task);
 	}
+
 }

@@ -7,6 +7,6 @@ import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 
 public interface CommentDao extends GenericDao<Comment, Long>{
 
-	public List<Comment> findByTitle(String title);
+	public List<Comment> findByTask(Long taskID);
 	
 }

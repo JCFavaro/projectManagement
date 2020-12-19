@@ -7,7 +7,7 @@ public class CommentResponseDto implements DtoEntity {
 	private String title;
 
 	private String description;
-
+	
 	public String getTitle() {
 		return title;
 	}

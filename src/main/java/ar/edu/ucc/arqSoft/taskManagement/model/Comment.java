@@ -33,16 +33,7 @@ public class Comment extends GenericObject{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="TASK_ID")
 	private Task task;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="PROJECT_ID")
-	private Project project;
 	
-	/*public Comment(String title, String description) {
-		this.title = title;
-		this.description = description;
-	}*/
-
 	public String getTitle() {
 		return title;
 	}
@@ -65,15 +56,6 @@ public class Comment extends GenericObject{
 
 	public void setTask(Task task) {
 		this.task = task;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
 	}	
-	
 	
 }

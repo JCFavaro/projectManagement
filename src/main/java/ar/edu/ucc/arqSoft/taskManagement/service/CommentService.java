@@ -13,6 +13,7 @@ import ar.edu.ucc.arqSoft.taskManagement.dao.ProjectDao;
 import ar.edu.ucc.arqSoft.taskManagement.dao.TaskDao;
 import ar.edu.ucc.arqSoft.taskManagement.dto.CommentRequestDto;
 import ar.edu.ucc.arqSoft.taskManagement.dto.CommentResponseDto;
+import ar.edu.ucc.arqSoft.taskManagement.dto.ProjectResponseDto;
 import ar.edu.ucc.arqSoft.taskManagement.model.Comment;
 import ar.edu.ucc.arqSoft.taskManagement.model.Project;
 import ar.edu.ucc.arqSoft.taskManagement.model.Task;
@@ -23,9 +24,6 @@ public class CommentService {
 
 	@Autowired
 	private CommentDao commentDao;
-
-	@Autowired
-	private ProjectDao projectDao;
 
 	@Autowired
 	private TaskDao taskDao;
@@ -44,42 +42,15 @@ public class CommentService {
 
 	public CommentResponseDto addComment(CommentRequestDto dto) throws BadRequestException {
 		Comment comment = new Comment();
+		
+		comment.setTitle(dto.getTitle());
+		comment.setDescription(dto.getDescription());
+		comment.setTask(taskDao.load(dto.getTaskID()));
 
-		Task task = taskDao.load(dto.getTaskID());
+		commentDao.insert(comment);
 
-		Project project = projectDao.load(dto.getProjectID());
-
-		// Si se pasa el id del proyecto y la tarea, valido que esa tarea pertenezca al
-		// proyecto.
-		if (dto.getProjectID() != null && dto.getTaskID() != null && task.getProject().getId() == dto.getProjectID()) {
-			
-			//Si el estado del proyecto y la tarea no es Cerrado ni Terminado
-			if (project.getState().getName() == "Cerrado" || project.getState().getName() == "Terminado"
-					|| task.getState().getName() == "Cerrado" || task.getState().getName() == "Terminado") {
-				
-				comment.setProject(project);
-				comment.setTask(task);
-				
-			}
-			//Si solo pasan el proyecto y el estado no es cerrado ni terminado
-		} else if (dto.getProjectID() != null && dto.getTaskID() == null && project.getState().getName() != "Cerrado"
-				|| project.getState().getName() != "Terminado") {
-			
-			comment.setProject(project);
-			//Si solo pasan la tarea y el estado no es cerrado ni terminado
-		} else if (dto.getProjectID() == null && dto.getTaskID() != null && task.getState().getName() != "Cerrado"
-				|| task.getState().getName() != "Terminado") {
-			
-			comment.setTask(task);
-			
-		} else {
-			throw new BadRequestException();
-		}
-
-		CommentResponseDto response = new CommentResponseDto();
-
-		response.setTitle(comment.getTitle());
-		response.setDescription(comment.getDescription());
+		CommentResponseDto response = (CommentResponseDto) new ModelDtoConverter().convertToDto(comment,
+				new CommentResponseDto());
 
 		return response;
 	}
