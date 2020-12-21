@@ -65,8 +65,12 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/{projectID}/changestate", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Object> changeState(@PathVariable("projectID") Long projectID,
-			@RequestBody Long stateID) throws EntityNotFoundException, BadRequestException {
+			@RequestBody Long stateID) throws EntityNotFoundException {
+		try {
 		ProjectResponseDto dto = projectService.changeState(projectID, stateID);
 		return new ResponseEntity<Object>(dto, HttpStatus.OK);
+		} catch (BadRequestException e) {
+			return new ResponseEntity<Object>(e, HttpStatus.BAD_REQUEST); 
+		}
 	}
 }

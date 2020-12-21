@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,8 +30,8 @@ public class Project extends GenericObject {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@ManyToMany(mappedBy = "projects", fetch = FetchType.LAZY)
-	private Set<User> users;
+	@ManyToMany(mappedBy = "projects", cascade = CascadeType.PERSIST) //fetch = FetchType.LAZY)
+	private Set<User> users = new HashSet<User>();
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private State state;

@@ -1,5 +1,6 @@
 package ar.edu.ucc.arqSoft.taskManagement.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,9 +42,9 @@ public class User extends GenericObject {
 	@Column(name = "EMAIL")
 	private String email;
 
-	//@JoinTable(name = "REL_USER_PROJECT", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PROJECT_ID"))
+	@JoinTable(name = "USER_PROJECT", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<Project> projects;
+	private Set<Project> projects = new HashSet<Project>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Task> tasks;
